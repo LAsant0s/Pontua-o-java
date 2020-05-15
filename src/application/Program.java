@@ -8,9 +8,9 @@ public class Program {
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		
-		int pCompras, pInadimplencia, pForma;
-		
+
+		int pCompras, pInadimplencia = 0, pForma = 0;
+
 		// Impressão do cabeçalho
 		System.out.println("SISTEMA DE PERFIL DE CLIENTE");
 		System.out.println("--------------------------------");
@@ -26,24 +26,44 @@ public class Program {
 
 		// Leitura dos outros dados
 		System.out.print("Quantas vezes o cliente atrasou o pagamento? ");
-		int inadimplencia = sc.nextInt();
+		int atraso = sc.nextInt();
 		System.out.print("A maioria das compras foi em dinheiro, cartão, ou boleto (D/C/B)? ");
 		char fPagamento = sc.next().charAt(0);
 		System.out.println();
-		
+
 		// Score do volume de compras
-		if(vCompras == 0) {
-			pCompras = 0; 
-		}else if(vCompras > 2 && ticket <= 3000.00){
-			pCompras = 40; 
-		}else if(ticket <= 3000.00){
-				pCompras = 20; 	
-		}else {
+		if (vCompras == 0) {
+			pCompras = 0;
+		} else if (vCompras > 2 && ticket <= 3000.00) {
+			pCompras = 40;
+		} else if (ticket <= 3000.00) {
+			pCompras = 20;
+		} else {
 			pCompras = 60;
 		}
-		
+
 		System.out.println("Score de volume de compras = " + pCompras + " pontos");
+		System.out.println();
 		
+		//Scores de inadimplencia
+		if(atraso > 1 || vCompras == 0) {
+			pInadimplencia = 0; 
+		}else if(vCompras > 0 && atraso == 0) {
+			pInadimplencia = 30; 
+		}else if(vCompras > 0 && atraso >= 1) {
+			pInadimplencia = 15;
+		}
+		
+		//Score de forma de pagamento
+		if((fPagamento == 'd' || fPagamento == 'D') && vCompras > 0) {
+			pForma = 5;
+		}else if(vCompras > 0){
+			pForma = 10;
+		}
+		
+		System.out.println("Score de inadimplência = " + pInadimplencia + " pontos");
+		System.out.println("Score de forma de pagamento = " + pForma + " pontos");
+		System.out.println();
 		
 		sc.close();
 
