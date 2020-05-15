@@ -20,6 +20,13 @@ public class Program {
 		int vCompras = sc.nextInt(); 
 		System.out.print("Qual o ticket médio? ");
 		double ticket = sc.nextDouble();
+		System.out.println();
+		
+		//Leitura dos outros dados
+		System.out.print("Quantas vezes o cliente atrasou o pagamento? ");
+		int inadimplencia = sc.nextInt();  
+		System.out.print("A maioria das compras foi em dinheiro, cartão, ou boleto (D/C/B)? ");
+		char fPagamento = sc.next().charAt(0); 
 		
 		sc.close();
 
