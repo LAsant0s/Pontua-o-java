@@ -10,6 +10,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		int pCompras, pInadimplencia = 0, pForma = 0;
+		String classificacao;
 
 		// Impressão do cabeçalho
 		System.out.println("SISTEMA DE PERFIL DE CLIENTE");
@@ -44,27 +45,37 @@ public class Program {
 
 		System.out.println("Score de volume de compras = " + pCompras + " pontos");
 		System.out.println();
-		
-		//Scores de inadimplencia
-		if(atraso > 1 || vCompras == 0) {
-			pInadimplencia = 0; 
-		}else if(vCompras > 0 && atraso == 0) {
-			pInadimplencia = 30; 
-		}else if(vCompras > 0 && atraso >= 1) {
+
+		// Scores de inadimplencia
+		if (atraso > 1 || vCompras == 0) {
+			pInadimplencia = 0;
+		} else if (vCompras > 0 && atraso == 0) {
+			pInadimplencia = 30;
+		} else if (vCompras > 0 && atraso == 1) {
 			pInadimplencia = 15;
 		}
-		
-		//Score de forma de pagamento
-		if((fPagamento == 'd' || fPagamento == 'D') && vCompras > 0) {
+
+		// Score de forma de pagamento
+		if ((fPagamento == 'd' || fPagamento == 'D') && vCompras > 0) {
 			pForma = 5;
-		}else if(vCompras > 0){
+		} else if (vCompras > 0) {
 			pForma = 10;
 		}
-		
+
 		System.out.println("Score de inadimplência = " + pInadimplencia + " pontos");
 		System.out.println("Score de forma de pagamento = " + pForma + " pontos");
 		System.out.println();
-		
+
+		// Classificação final
+		if (pCompras + pInadimplencia + pForma <= 25) {
+			classificacao = "BRONZE";
+		} else if (pCompras + pInadimplencia + pForma > 25 && pCompras + pInadimplencia + pForma <= 75) {
+			classificacao = "PRATA";
+		} else {
+			classificacao = "OURO";
+		}
+
+		System.out.println("Classificação final = CLIENTE " + classificacao);
 		sc.close();
 
 	}
